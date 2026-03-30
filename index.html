@@ -4,11 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="v6KJN3I_U3wlXTwwjSgsiC2_BgD35jQJIXaNS3iz1oE" />
-    <title>ViralPulse AI | Ultimate Creator Tools</title>
+    
+    <title>ViralPulse AI | ১০০% ফ্রি কন্টেন্ট ক্রিয়েটর টুলস</title>
+    
+    <meta name="title" content="ViralPulse AI | ১০০% ফ্রি কন্টেন্ট ক্রিয়েটর টুলস">
+    <meta name="description" content="ViralPulse AI offers 12 powerful AI tools for YouTube, Facebook, and TikTok creators. Viral captions, scripts, and SEO strategies. Created by Ars & Nuko.">
+    <meta name="keywords" content="ViralPulse AI, AI Tools, YouTube SEO, Facebook Reels, TikTok Viral, Free AI Scripts, Ars & Nuko">
+    <meta name="author" content="Ars & Nuko">
 
-    <meta name="description" content="ViralPulse AI offers 12 powerful AI tools for YouTube, Facebook, and TikTok creators. Created by Ars & Nuko.">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://viral-pulse-ai.vercel.app/">
+    <meta property="og:title" content="ViralPulse AI | Ultimate Creator Tools">
+    <meta property="og:description" content="100% Free AI tools for Content Creators. Generate viral scripts, captions, and hooks in seconds.">
     <meta property="og:image" content="logo.png">
+    <meta property="og:site_name" content="ViralPulse AI">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://viral-pulse-ai.vercel.app/">
+    <meta property="twitter:title" content="ViralPulse AI | Ultimate Creator Tools">
+    <meta property="twitter:description" content="100% Free AI tools for Content Creators. Generate viral scripts, captions, and hooks in seconds.">
+    <meta property="twitter:image" content="logo.png">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -80,7 +97,7 @@
     </main>
 
     <script>
-        let currentLang = 'bn';
+        let currentLang = 'en';
         let currentTool = 'caption';
         let selectedPlatform = 'Facebook';
 
@@ -122,10 +139,10 @@ function renderUI() {
     document.getElementById('navAbout').innerText = t.navAbout;
     document.getElementById('navContact').innerText = t.navContact;
     document.getElementById('copyBtn').innerHTML = `<i class="fas fa-copy"></i> ${t.copy}`;
-    
+
     const inputArea = document.getElementById('userInput');
     inputArea.placeholder = currentLang === 'bn' ? "আপনার ভিডিওর বিষয়বস্তু এখানে লিখুন..." : "Write your video topic here...";
-    
+
     const grid = document.getElementById('toolGrid');
     grid.innerHTML = '';
     Object.keys(toolConfig).forEach(key => {
