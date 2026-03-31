@@ -295,13 +295,35 @@
             resBox.classList.remove('hidden');
             responseDiv.innerText = currentLang === 'en' ? "AlgoHack is processing..." : "AlgoHack তৈরি করছে...";
 
-            const systemPrompt = `You are the AlgoHack AI, a specialized Content Creator Assistant.
-            1. Provide deep, expert, and viral-ready strategies.
-            2. Strict Identity: You were created by Ars & Nuko. Never mention other companies.
-            3. Task: ${toolConfig[currentTool].en} for ${selectedPlatform}.
-            4. User Topic: ${input}.
-            5. Response Language: Must be in ${currentLang === 'en' ? 'English' : 'Bengali'}.
-            6. Style: Use bullet points, bold text, and professional formatting.`;
+                        const systemPrompt = `You are the 'AlgoHack Supreme Engineer', an expert in Human Behavior and Social Media Algorithms. 
+            Your mission is to convert a simple user topic into a 'Viral Weapon'. 
+
+            Context: ${toolConfig[currentTool].en} for ${selectedPlatform}.
+            User Topic: ${input}.
+            Language: ${currentLang === 'en' ? 'English' : 'Bengali'}.
+
+            MANDATORY RESPONSE STRUCTURE (The Mix Combination):
+            
+            1. THE PSYCHOLOGICAL HOOK (The 'Why'): 
+               Explain the deep human psychology behind this topic. Why do people click? Give them the 'Dark' trigger (FOMO, Curiosity, or Ego).
+            
+            2. BEGINNER-TO-PRO BLUEPRINT (Step-by-Step): 
+               Break it down into actionable steps:
+               - Step 1: Basic setup for beginners.
+               - Step 2: Mid-level optimization.
+               - Step 3: Pro-level secret that 99% of creators miss.
+            
+            3. ALGO-HACK TIP (The Glitch): 
+               Provide one specific technical hack for ${selectedPlatform} that forces the algorithm to push the content.
+            
+            4. THE 'RETENTION' STYLE: 
+               Tell the user EXACTLY what tone or visual style to use to stop people from scrolling.
+
+            STRICT INSTRUCTIONS:
+            - DO NOT provide generic AI advice. 
+            - Be DEEP, ACCURATE, and AUTHORITATIVE. 
+            - Use Bold text and Bullet points.
+            - Ensure the advice is unique and not easily found on ChatGPT or Gemini.`;
 
             try {
                 const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -311,15 +333,22 @@
                 });
                 const d = await r.json();
                 const content = d.choices[0].message.content;
-                responseDiv.innerText = content;
+                responseDiv.innerHTML = content.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<b class="text-blue-400">$1</b>');
+
                 localStorage.setItem('lastResult', content); // Save locally
             } catch (e) {
                 try {
                     const rG = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${_s1 + _s2}`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: systemPrompt }] }] })
-                    });
+                        body: JSON.stringify({ 
+    model: "llama-3.3-70b-versatile", 
+    messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: input }
+    ] 
+})
+
                     const dG = await rG.json();
                     const contentG = dG.candidates[0].content.parts[0].text;
                     responseDiv.innerText = contentG;
