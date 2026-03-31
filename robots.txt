@@ -1,0 +1,5 @@
+# AlgoHack AI - Global Configuration
+User-agent: *
+Allow: /
+
+Sitemap: https://algohack-ai.vercel.app/sitemap.xml
