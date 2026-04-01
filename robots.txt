@@ -1,10 +1,19 @@
+# ---------------------------------------------------------
 # AlgoHack AI - Global Configuration
+# Engineered for Social Media Algorithm Hacking
+# ---------------------------------------------------------
+
 User-agent: *
 Allow: /
 
-# গুগলের জন্য স্পেসিফিক ডিরেক্টরি (ঐচ্ছিক কিন্তু ভালো)
+# গুগলের জন্য অপ্রয়োজনীয় ডিরেক্টরি ব্লক করা (সিকিউরিটির জন্য)
 Disallow: /private/
 Disallow: /temp/
+Disallow: /backup/
 
 # আপনার সাইটম্যাপের সঠিক লিঙ্ক
-Sitemap: https://algohack.vercel.app/sitemap.xml
+Sitemap: https://algohack-ai.vercel.app/sitemap.xml
+
+# ---------------------------------------------------------
+# End of robots.txt - Happy Crawling!
+# ---------------------------------------------------------
