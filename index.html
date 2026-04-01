@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -88,7 +88,7 @@
         .loader { border: 3px solid #1e293b; border-top: 3px solid #3b82f6; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; display: inline-block; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        .copy-btn { position: absolute; top: 15px; right: 15px; background: #2563eb; color: white; padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: bold; cursor: pointer; border: none; transition: 0.3s; z-index: 10; }
+        .copy-btn { position: absolute; top: 15px; right: 15px; background: #2563eb; color: white; padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: bold; cursor: pointer; border: none; transition: 0.3s; }
         .copy-btn:hover { background: #1d4ed8; }
 
         .logo-text { font-family: 'Inter', sans-serif; letter-spacing: -1px; }
@@ -281,8 +281,7 @@
             document.getElementById('guidanceText').innerText = currentLang === 'en' ? `${toolConfig[currentTool].en} Input:` : `${toolConfig[currentTool].bn} এর বিষয়:`;
         }
 
-        // --- THE MAGIC FORMATTER ---
-        // Converts AI Markdown into Beautiful HTML
+        // --- Custom AI Output Formatter ---
         function formatAIResponse(text) {
             let formatted = text.replace(/\n/g, '<br>');
             formatted = formatted.replace(/### (.*?)(<br>|$)/g, '<div class="ai-heading">$1</div>');
@@ -309,16 +308,15 @@
             inputArea.disabled = true;
             
             resBox.classList.remove('hidden');
-            responseDiv.innerText = currentLang === 'en' ? "Analyzing Algorithm Patterns..." : "অ্যালগরিদম বিশ্লেষণ করা হচ্ছে...";
+            responseDiv.innerText = currentLang === 'en' ? "AlgoHack is processing..." : "AlgoHack তৈরি করছে...";
 
-            // --- DEEP PSYCHOLOGICAL PROMPT ---
             const systemPrompt = `You are the 'AlgoHack Supreme Engineer', an expert in Human Behavior and Social Media Algorithms. 
             Your mission is to convert a simple user topic into a 'Viral Weapon'. 
 
             Context: ${toolConfig[currentTool].en} for ${selectedPlatform}.
             Language: ${currentLang === 'en' ? 'English' : 'Bengali'}.
 
-            MANDATORY RESPONSE STRUCTURE (The Mix Combination):
+            MANDATORY RESPONSE STRUCTURE:
             
             ### 1. THE PSYCHOLOGICAL HOOK (The 'Why')
             Explain the deep human psychology behind this topic. Why do people click? Give them the 'Dark' trigger (FOMO, Curiosity, or Ego).
@@ -338,11 +336,10 @@
             STRICT INSTRUCTIONS:
             - DO NOT provide generic AI advice. 
             - Be DEEP, ACCURATE, and AUTHORITATIVE. 
-            - Ensure the advice is unique.
             - Format heavily using ### for titles and ** for keywords.`;
 
             try {
-                // GROQ API CALL (Fixed Payload)
+                // Primary Groq Call
                 const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${_m1 + _m2}`, 'Content-Type': 'application/json' },
@@ -352,20 +349,18 @@
                             { role: "system", content: systemPrompt },
                             { role: "user", content: `My Topic is: ${input}` }
                         ],
-                        temperature: 0.7
+                        temperature: 0.7 
                     })
                 });
-                
                 const d = await r.json();
                 const content = d.choices[0].message.content;
                 
-                // Save RAW and display FORMATTED
-                localStorage.setItem('lastResultRaw', content); 
+                localStorage.setItem('lastResultRaw', content); // Save locally for raw text copy
                 responseDiv.innerHTML = formatAIResponse(content);
 
             } catch (e) {
                 try {
-                    // GEMINI API FALLBACK CALL (Fixed Syntax)
+                    // Fallback Gemini Call (Fixed payload and syntax)
                     const rG = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${_s1 + _s2}`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -374,13 +369,12 @@
                             contents: [{ parts: [{ text: `My Topic is: ${input}` }] }] 
                         })
                     });
-                    
+
                     const dG = await rG.json();
                     const contentG = dG.candidates[0].content.parts[0].text;
                     
                     localStorage.setItem('lastResultRaw', contentG); 
                     responseDiv.innerHTML = formatAIResponse(contentG);
-                    
                 } catch (err) { 
                     responseDiv.innerHTML = "<span class='text-red-400'>Error! Server is busy. Please try again.</span>"; 
                 }
@@ -392,7 +386,6 @@
         }
 
         function copyResult() {
-            // Retrieve raw markdown from storage for a clean copy
             const textToCopy = localStorage.getItem('lastResultRaw') || document.getElementById('response').innerText;
             navigator.clipboard.writeText(textToCopy).then(() => {
                 const copyBtn = document.getElementById('copyBtn');
@@ -402,7 +395,6 @@
             });
         }
 
-        // Load last saved result if available
         window.onload = () => {
             const savedRawData = localStorage.getItem('lastResultRaw');
             if(savedRawData) {
