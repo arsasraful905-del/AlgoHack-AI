@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - AlgoHack AI</title>
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%232563eb%22/><path d=%22M50 25c-10 0-18 6-18 14 0 4 2 8 6 10-2 2-3 5-3 8 0 8 7 14 15 14s15-6 15-14c0-3-1-6-3-8 4-2 6-6 6-10 0-8-8-14-18-14z%22 fill=%22white%22/><circle cx=%2243%22 cy=%2240%22 r=%222%22 fill=%22%232563eb%22/><circle cx=%2257%22 cy=%2240%22 r=%222%22 fill=%22%232563eb%22/><path d=%22M40 60h20%22 stroke=%22%232563eb%22 stroke-width=%222%22/></svg>">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -22,19 +23,6 @@
             margin: 0;
             overflow-x: hidden;
             min-height: 100vh;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.15;
-            z-index: -1;
-            pointer-events: none;
         }
 
         #vanta-canvas {
@@ -56,64 +44,66 @@
         .glass-card:hover { 
             transform: translateY(-5px); 
             border-color: #3b82f6; 
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.15); 
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2); 
         }
 
         .logo-text { font-family: 'Inter', sans-serif; letter-spacing: -1px; }
     </style>
 </head>
-<body class="p-4 md:p-10 flex flex-col justify-between">
+<body class="p-4 md:p-10 flex flex-col min-h-screen">
 
     <div id="vanta-canvas"></div>
 
     <nav class="max-w-6xl mx-auto w-full flex flex-wrap justify-between items-center mb-12 gap-4 border-b pb-6 border-slate-800/50 relative z-10">
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
-                <i class="fas fa-bolt text-white text-xl"></i>
+                <i class="fas fa-brain text-white text-xl"></i>
             </div>
             <span class="font-extrabold text-2xl logo-text text-white">AlgoHack<span class="text-blue-500 underline decoration-blue-500/30">AI</span></span>
         </div>
-        <div class="flex items-center gap-4 md:gap-8 font-bold text-sm text-slate-400">
-            <a href="index.html" class="hover:text-blue-400 transition-colors text-slate-500">Home</a>
-            <a href="about.html" class="text-blue-400 transition-colors">About Us</a>
-            <a href="contact.html" class="hover:text-blue-400 transition-colors text-slate-500">Contact</a>
+        <div class="flex items-center gap-4 md:gap-8 font-bold text-sm">
+            <a href="index.html" class="text-slate-400 hover:text-blue-400 transition-colors">Home</a>
+            <a href="about.html" class="text-blue-400">About Us</a>
+            <a href="contact.html" class="text-slate-400 hover:text-blue-400 transition-colors">Contact</a>
             
             <div class="flex gap-2">
-                <button onclick="switchLang('en')" class="bg-slate-800/50 text-xs px-3 py-1.5 rounded-full border border-slate-700 hover:border-blue-500 transition-all font-bold text-white">EN</button>
-                <button onclick="switchLang('bn')" class="bg-slate-800/50 text-xs px-3 py-1.5 rounded-full border border-slate-700 hover:border-blue-500 transition-all font-bold text-white">BN</button>
+                <button onclick="switchLang('en')" class="bg-slate-800/50 text-[10px] px-2 py-1 rounded-md border border-slate-700 hover:border-blue-500 transition-all text-white">EN</button>
+                <button onclick="switchLang('bn')" class="bg-slate-800/50 text-[10px] px-2 py-1 rounded-md border border-slate-700 hover:border-blue-500 transition-all text-white">BN</button>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-3xl mx-auto w-full glass-card p-8 md:p-12 mb-12 relative z-10 text-center">
+    <main class="max-w-3xl mx-auto w-full glass-card p-8 md:p-12 my-auto relative z-10">
         
-        <div id="content-en">
+        <div id="content-en" class="text-center">
             <div class="w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-bolt text-blue-500 text-3xl"></i>
+                <i class="fas fa-brain text-blue-500 text-3xl"></i>
             </div>
-            <h1 class="text-3xl md:text-4xl font-black text-white mb-6">About AlgoHack AI</h1>
+            <h1 class="text-3xl md:text-4xl font-black text-white mb-6 italic">About AlgoHack AI</h1>
             
             <div class="text-slate-300 text-lg leading-relaxed text-left space-y-4">
-                <p>Welcome to <strong class="text-blue-500">AlgoHack AI</strong>, the ultimate toolkit for content creators. We provide 12 powerful AI tools to help YouTubers, Facebook, and TikTok creators generate viral scripts, SEO tags, and engaging captions instantly.</p>
-                <p>Our goal is to make content creation easy, free, and accessible to everyone without login barriers.</p>
+                <p>Welcome to <strong class="text-blue-500">AlgoHack AI</strong>, the ultimate ecosystem for modern creators. We offer a suite of 12 high-performance AI tools specifically engineered to help YouTubers, Facebook influencers, and TikTok stars dominate their niche.</p>
+                <p>From generating viral video scripts to optimizing SEO tags and high-conversion captions, our platform simplifies the complex logic of social media algorithms.</p>
+                <p>Our mission is to provide professional-grade AI technology for <strong class="text-white">FREE</strong>, ensuring that creativity has no barriers and no login requirements.</p>
             </div>
 
             <div class="mt-10 border-t border-slate-800 pt-6">
                 <a href="index.html" class="text-blue-400 hover:text-blue-300 font-bold transition-colors flex items-center justify-center gap-2">
-                    <i class="fas fa-arrow-left text-sm"></i> Back to Home
+                    <i class="fas fa-arrow-left text-sm"></i> Back to Hacking Space
                 </a>
             </div>
         </div>
 
-        <div id="content-bn" style="display:none;">
+        <div id="content-bn" style="display:none;" class="text-center">
             <div class="w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-bolt text-blue-500 text-3xl"></i>
+                <i class="fas fa-brain text-blue-500 text-3xl"></i>
             </div>
             <h1 class="text-3xl md:text-4xl font-black text-white mb-6">অ্যালগোহ্যাক এআই সম্পর্কে</h1>
             
             <div class="text-slate-300 text-lg leading-relaxed text-left space-y-4">
-                <p><strong class="text-blue-500">AlgoHack AI</strong>-এ আপনাকে স্বাগতম! আমরা কন্টেন্ট ক্রিয়েটরদের জন্য একটি পূর্ণাঙ্গ এআই টুলকিট। ইউটিউব, ফেসবুক এবং টিকটক ক্রিয়েটরদের জন্য আমাদের এখানে ১২টি শক্তিশালী টুল রয়েছে যা দিয়ে সহজেই ভাইরাল স্ক্রিপ্ট, এসইও ট্যাগ এবং ক্যাপশন তৈরি করা যায়।</p>
-                <p>আমাদের লক্ষ্য হলো কন্টেন্ট তৈরির কাজকে সহজ, ফ্রি এবং সবার জন্য উন্মুক্ত করা।</p>
+                <p><strong class="text-blue-500">AlgoHack AI</strong> হলো আধুনিক কন্টেন্ট ক্রিয়েটরদের জন্য একটি শক্তিশালী ইকোসিস্টেম। ইউটিউব, ফেসবুক এবং টিকটক ক্রিয়েটরদের জন্য আমরা ১২টি হাই-পারফরম্যান্স এআই টুল তৈরি করেছি, যা আপনার কন্টেন্টকে ভাইরাল করতে সাহায্য করবে।</p>
+                <p>ভাইরাল ভিডিও স্ক্রিপ্ট জেনারেট করা থেকে শুরু করে এসইও (SEO) ট্যাগ এবং হাই-কনভার্সন ক্যাপশন তৈরি—সবকিছুই এখন হবে এক ক্লিকে। আমরা সোশ্যাল মিডিয়া অ্যালগরিদমের জটিল লজিককে সহজ করে দিই।</p>
+                <p>আমাদের মূল লক্ষ্য হলো প্রফেশনাল এআই প্রযুক্তি সবার জন্য <strong class="text-white">ফ্রি</strong> এবং লগইন করার ঝামেলামুক্ত রাখা, যাতে আপনার সৃজনশীলতা কোনো বাধাপ্রাপ্ত না হয়।</p>
             </div>
 
             <div class="mt-10 border-t border-slate-800 pt-6">
@@ -124,8 +114,8 @@
         </div>
     </main>
 
-    <footer class="text-center py-6 border-t border-slate-900/50 relative z-10">
-        <div class="text-xs font-black text-slate-600 uppercase tracking-[0.3em] mb-2">
+    <footer class="text-center py-8 mt-auto border-t border-slate-900/50 relative z-10">
+        <div class="text-[10px] font-black text-slate-600 uppercase tracking-[0.4em] mb-2">
             Engineered for Growth by Ars & Nuko
         </div>
         <p class="text-[11px] text-slate-700">© 2026 AlgoHack AI. Precision Tools for Modern Creators.</p>
@@ -145,7 +135,7 @@
           color: 0x3b82f6,
           color2: 0x1e293b,
           backgroundColor: 0x020617,
-          size: 2.50,
+          size: 3.00,
           spacing: 35.00,
           showLines: false
         });
