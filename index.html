@@ -320,33 +320,113 @@
             resBox.classList.remove('hidden');
             responseDiv.innerText = currentLang === 'en' ? "AlgoHack is processing..." : "AlgoHack তৈরি করছে...";
 
-            const systemPrompt = `You are the 'AlgoHack Supreme Engineer', an expert in Human Behavior and Social Media Algorithms. 
-            Your mission is to convert a simple user topic into a 'Viral Weapon'. 
+                    // ১. টুল আইডি অনুযায়ী ডায়নামিক হেডলাইন জেনারেটর
+        const getToolHeadings = (id, lang, platform) => {
+            const isBn = lang !== 'en';
+            const map = {
+                0: { // ক্যাপশন ও ট্যাগ
+                    h1: isBn ? "✍️ ক্যাপশন ও ট্যাগ রিডিং সাইকোলজি" : "✍️ Caption & Tag Psychology",
+                    h2: isBn ? "📊 কিওয়ার্ড ও ট্যাগ সাজানোর মাস্টার প্ল্যান" : "📊 Keyword & Tag Blueprint",
+                    h3: isBn ? `⚡ ${platform} এর অ্যালগরিদম ট্যাগ হ্যাক` : `⚡ ${platform} Tag Algorithm Hack`,
+                    h4: isBn ? "🚫 স্প্যামিং বা ভুল ট্যাগ ব্যবহারের বিপদ" : "🚫 Spam Tagging Mistakes to Avoid"
+                },
+                1: { // ভিডিওতে কী বলবেন? (স্ক্রিপ্ট)
+                    h1: isBn ? "🎬 ভিডিও শুরুর সাইকোলজি (মানুষ কেন দেখবে?)" : "🎬 Video Opening Psychology",
+                    h2: isBn ? "📝 এ টু জেড স্ক্রিপ্ট ড্রাফট (Beginner to Pro)" : "📝 Full Video Script Blueprint",
+                    h3: isBn ? `⚡ ${platform} এ রিটেনশন ধরে রাখার ট্রিক` : `⚡ ${platform} Retention Glitch`,
+                    h4: isBn ? "🚫 স্ক্রিপ্টিংয়ের যে ভুলগুলো মানুষ করে" : "🚫 Common Scripting Mistakes"
+                },
+                2: { // কভার ছবির আইডিয়া
+                    h1: isBn ? "👁️ ভিজ্যুয়াল ক্লিক সাইকোলজি (CTR হ্যাক)" : "👁️ Visual Click Psychology",
+                    h2: isBn ? "🎨 থাম্বনেইল ডিজাইন ও কালার থিওরি" : "🎨 Thumbnail Design Strategy",
+                    h3: isBn ? `⚡ ${platform} এ থাম্বনেইল শো-আপ ট্রিক` : `⚡ ${platform} Visual Hack`,
+                    h4: isBn ? "🚫 হিজিবিজি ও অস্পষ্ট থাম্বনেইলের ক্ষতি" : "🚫 Cluttered Thumbnail Mistake"
+                },
+                3: { // প্রোফাইল অপ্টিমাইজার
+                    h1: isBn ? "👤 ফার্স্ট ইমপ্রেশন সাইকোলজি" : "👤 First Impression Psychology",
+                    h2: isBn ? "📝 প্রফেশনাল বায়ো ও প্রোফাইল সাজানোর ট্রিক" : "📝 Bio Optimization Blueprint",
+                    h3: isBn ? `⚡ ${platform} এ প্রোফাইল এসইও হ্যাক` : `⚡ ${platform} Profile SEO Hack`,
+                    h4: isBn ? "🚫 অস্পষ্ট ও এলোমেলো প্রোফাইল বায়ো" : "🚫 Vague Bio Mistakes"
+                },
+                4: { // হুক লাইন
+                    h1: isBn ? "🎯 ব্রেন ডোপামিন হুক (Attention Grabber)" : "🎯 Brain Dopamine Hook Strategy",
+                    h2: isBn ? "🔥 ৩টি হুক লেভেল (Basic to Pro)" : "🔥 3 Hook Levels (Basic to Pro)",
+                    h3: isBn ? `⚡ ${platform} এ প্রথম ৩ সেকেন্ডের ট্রিক` : `⚡ ${platform} First 3-Sec Trick`,
+                    h4: isBn ? "🚫 বিরক্তিকর হুক যা মানুষ স্ক্রোল করে চলে যায়" : "🚫 Boring Hooks That Kill Reach"
+                },
+                5: { // ৭ দিনের রুটিন
+                    h1: isBn ? "📅 কন্টেন্ট কনসিস্টেন্সি সাইকোলজি" : "📅 Content Consistency Psychology",
+                    h2: isBn ? "⏰ ৭ দিনের মাস্টার রুটিন ও শিডিউল" : "⏰ 7-Day Content Schedule",
+                    h3: isBn ? `⚡ ${platform} এ কন্টেন্ট ডিস্ট্রিবিউশন ট্রিক` : `⚡ ${platform} Distribution Hack`,
+                    h4: isBn ? "🚫 অনিয়মিত পোস্টিংয়ের কুফল" : "🚫 Irregular Posting Mistakes"
+                },
+                6: { // টাকা আয় (Monetization)
+                    h1: isBn ? "💰 ভিউ থেকে আয়ের সাইকোলজি" : "💰 Monetization Psychology",
+                    h2: isBn ? "🚀 ইনকাম জেনারেট করার পাথওয়ে" : "🚀 Revenue Generation Blueprint",
+                    h3: isBn ? `⚡ ${platform} মনিটাইজেশন সিক্রেট` : `⚡ ${platform} Earning Hack`,
+                    h4: isBn ? "🚫 পার্টনার পলিসি ভায়োলেশনের ভুল" : "🚫 Partner Policy Mistakes"
+                },
+                7: { // কমেন্টের উত্তর
+                    h1: isBn ? "💬 ফ্যান লয়ালটি সাইকোলজি" : "💬 Fan Loyalty Psychology",
+                    h2: isBn ? "🤝 স্মার্টলি কমেন্ট রিপ্লাই দেওয়ার গাইড" : "🤝 Engaging Reply Blueprint",
+                    h3: isBn ? `⚡ ${platform} অ্যালগরিদমে কমেন্টের প্রভাব` : `⚡ ${platform} Comment Algorithm Hack`,
+                    h4: isBn ? "🚫 কমেন্ট ইগনোর বা বাজে ব্যবহারের ফল" : "🚫 Ignoring Fan Comments Mistake"
+                },
+                8: { // কথা বলার ধরন
+                    h1: isBn ? "🎙️ ভয়েস অ্যান্ড রিটেনশন সাইকোলজি" : "🎙️ Voice & Retention Psychology",
+                    h2: isBn ? "🗣️ কথা বলার এক্সপার্ট টোন ও বডি ল্যাঙ্গুয়েজ" : "🗣️ Tone & Body Language Blueprint",
+                    h3: isBn ? `⚡ ${platform} এ ভয়েস ক্ল্যারিটি হ্যাক` : `⚡ ${platform} Audio Clarity Hack`,
+                    h4: isBn ? "🚫 ফ্ল্যাট বা একঘেয়ে কথা বলার ভুল" : "🚫 Monotonous Tone Mistakes"
+                },
+                9: { // গাইডলাইন
+                    h1: isBn ? "⚖️ প্ল্যাটফর্ম সেফটি সাইকোলজি" : "⚖️ Platform Safety Psychology",
+                    h2: isBn ? "🛡️ অ্যাকাউন্ট সুরক্ষিত রাখার প্ল্যান" : "🛡️ Account Safety Blueprint",
+                    h3: isBn ? `⚡ ${platform} কপিরাইট ও স্ট্রাইক বাঁচার উপায়` : `⚡ ${platform} Policy Bypass Trick`,
+                    h4: isBn ? "🚫 কপিরাইট মিউজিক বা ক্লিপ ব্যবহারের ভুল" : "🚫 Using Copyrighted Media Mistake"
+                },
+                10: { // ভাইরাল ট্রেন্ড
+                    h1: isBn ? "🌊 ট্রেন্ড ওয়েভ সাইকোলজি" : "🌊 Trend Wave Psychology",
+                    h2: isBn ? "🔥 ট্রেন্ডে গা ভাসানোর স্ট্র্যাটেজি" : "🔥 Trend Adoption Blueprint",
+                    h3: isBn ? `⚡ ${platform} এ দ্রুত ট্রেন্ড ধরার কৌশল` : `⚡ Spotting ${platform} Trends Fast`,
+                    h4: isBn ? "🚫 ডেড ট্রেন্ডে কন্টেন্ট বানানোর ভুল" : "🚫 Hopping on Dead Trends"
+                },
+                11: { // এসইও র‍্যাঙ্কিং
+                    h1: isBn ? "🔍 সার্চ অ্যালগরিদম সাইকোলজি" : "🔍 Search Algo Psychology",
+                    h2: isBn ? "📈 সার্চে সবার আগে আসার প্ল্যান" : "📈 Search Ranking Master Plan",
+                    h3: isBn ? `⚡ ${platform} এসইও (SEO) মেটাডাটা হ্যাক` : `⚡ ${platform} Metadata Glitch`,
+                    h4: isBn ? "🚫 ডেসক্রিপশনে অতিরিক্ত কিওয়ার্ড গোঁজার ভুল" : "🚫 Keyword Stuffing Mistakes"
+                }
+            };
+            return map[id] || { h1: "Psychology", h2: "Plan", h3: "Hack", h4: "Mistake" };
+        };
 
-            Context: ${toolConfig[currentTool].en} for ${selectedPlatform}.
-            Language: ${currentLang === 'en' ? 'English' : 'Bengali'}.
+        const h = getToolHeadings(currentTool, currentLang, selectedPlatform);
 
-            MANDATORY RESPONSE STRUCTURE:
-            
-            ### 1. THE PSYCHOLOGICAL HOOK (The 'Why')
-            Explain the deep human psychology behind this topic. Why do people click? Give them the 'Dark' trigger (FOMO, Curiosity, or Ego).
-            
-            ### 2. BEGINNER-TO-PRO BLUEPRINT (Step-by-Step)
-            Break it down into actionable steps:
-            * Step 1: Basic setup for beginners.
-            * Step 2: Mid-level optimization.
-            * Step 3: Pro-level secret that 99% of creators miss.
-            
-            ### 3. ALGO-HACK TIP (The Glitch)
-            Provide one specific technical hack for ${selectedPlatform} that forces the algorithm to push the content.
-            
-            ### 4. THE 'RETENTION' STYLE
-            Tell the user EXACTLY what tone or visual style to use to stop people from scrolling.
+        // ২. ফাইনাল সিস্টেম প্রম্পট (ব্যাকটিক ব্যবহার করা হয়েছে)
+        const systemPrompt = `You are 'AlgoHack AI', a world-class Social Media Algorithm Analyst.
+Current Tool: ${toolConfig[currentTool].en} on ${selectedPlatform}.
+Output Language: ${currentLang === 'en' ? 'English' : 'Professional Bengali'}.
 
-            STRICT INSTRUCTIONS:
-            - DO NOT provide generic AI advice. 
-            - Be DEEP, ACCURATE, and AUTHORITATIVE. 
-            - Format heavily using ### for titles and ** for keywords.`;
+Instructions:
+1. No intro fluff. No "Here is your plan".
+2. Use exactly these headings with their specific emojis.
+3. Be technical, data-driven, and authoritative.
+
+MANDATORY STRUCTURE:
+
+### ${h.h1}
+[Deep psychology logic here]
+
+### ${h.h2}
+* 🟢 **Phase 1 (Beginner):** [Actionable step]
+* 🟡 **Phase 2 (Intermediate):** [Engagement tactic]
+* 🔴 **Phase 3 (Pro):** [Algorithm secret]
+
+### ${h.h3}
+[One specific technical trick for ${selectedPlatform}]
+
+### ${h.h4}
+[One common mistake to avoid]`;
 
             try {
                 // Primary Groq Call
